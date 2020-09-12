@@ -1,66 +1,76 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-	<title>E-Nano</title>
-  </head>
-  <body>
-    <header>
-		<div class="navbar navbar-dark bg-dark box-shadow">
-			<div class="container d-flex justify-content-between">
-				<a href="#" class="navbar-brand d-flex align-items-center">
-					<strong>E-Nano</strong>
-				</a>
-				<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#about">
-					<span><i class="fas fa-info-circle"></i></span>
-				</button>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" charset="utf8">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+		<script src="jquery-linedtextarea.js"></script>
+		<link href="styles.css" type="text/css" rel="stylesheet" />
+		<title>E-Nano</title>
+	</head>
+	<body>
+		<header>
+			<div class="navbar navbar-dark bg-dark box-shadow">
+				<div class="container d-flex justify-content-between">
+					<a href="#" class="navbar-brand d-flex align-items-center">
+						<strong>E-Nano</strong>
+					</a>
+					<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#about" onclick="getAutors()">
+						<span><i class="fas fa-info-circle"></i></span>
+					</button>
+				</div>
+			</div>
+		</header>
+		<div class="modal fade" id="about" tabindex="-1" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">About</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body">
+						<div><strong>E-Nano</strong></div>
+						<div><strong>EIF-400 Paradigmas de programacion</strong></div>
+						<div><strong>Grupo 01-1pm</strong></div>
+						<div><strong>Integrantes:</strong></div>
+							<div id="panelAutors">
+							</div>
+							<div class="modal-footer">
+								<strong>Version: 0.1</strong>
+							</div>
+					</div>
+				</div>
 			</div>
 		</div>
-	</header>
-	<div class="modal fade" id="about" tabindex="-1" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">About</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-					<div><strong>E-Nano</strong></div>
-					<div><strong>EIF-400 Paradigmas de programacion</strong></div>
-					<div><strong>Grupo 01-1pm</strong></div>
-					<div>Giancarlo Alvarado</div>
-					<div>Jose Ricardo</div>
-					<div>Josue Viquez Campos</div>
-					<div>Greivin</div>
-					<div>Jasson Nunez Camacho</div>
-					<div><strong>Version: 0.1</strong></div>
-                </div>
-            </div>
-        </div>
-    </div>
-	<div class="row">
-		<div class="col-6">
-			<div class="jumbotron">
-				
+		<div class="row">
+			<div class="col-6">
+				<div class="jumbotron">
+				<textarea id="code" class="lined" rows="30" cols="70"></textarea>
+				<button type="button" class="btn btn-warning" style="margin-top: 10px;" onclick="clCode()">Clear</button>
+				<button type="button" class="btn btn-success" style="margin-top: 10px;">Send</button>
+				</div>
+			</div>
+			<div class="col-6">
+				<div class="jumbotron">
+					<textarea id="console" class="console" rows="23" cols="95" disabled></textarea>
+					<button type="button" class="btn btn-warning" style="margin-top: 10px;" onclick="clConsole()">Clear</button>
+				</div>
 			</div>
 		</div>
-		<div class="col-6">
-			<div class="jumbotron">
-				
-			</div>
-		</div>
-		
-		
-		
-		
-	</div>
-
-  </body>
+	
+		<script>
+			$(function() {
+				$(".lined").linedtextarea();
+			});
+			function clCode(){
+				$("#code").val("");
+			}
+			function clConsole(){
+				$("#console").val("");
+			}
+		</script>
+	</body>
 </html>
