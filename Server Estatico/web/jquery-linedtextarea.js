@@ -74,7 +74,7 @@
 })(jQuery);
    
    function getAutors(){
-    fetch('http://localhost:9090/authors')
+    fetch('http://localhost:9000/authors')
     .then( response => response.json())
     .then(json => printAutors(json))
       .catch(err => console.log(err));
@@ -85,8 +85,8 @@
      json.forEach(element => printAutor(element));
    }
 
-   function printAutor(json){
+   function printAutor({autor}){
     $("#panelAutors").append(
-      $("<div>" + json.autor + "</div>")
+      $("<div>" + autor + "</div>")
     );
    }
