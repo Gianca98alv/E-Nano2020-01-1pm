@@ -1,6 +1,11 @@
 # E-Nano2020-01-1pm
 Proyecto del grupo 01-1pm para el curso de Paradigmas de la Programación. NRC: 50059.  
-Integrantes: Giancarlo Alvarado Sánchez, José Ricardo Herrera Solano, Josué Víquez Campos, Greivin Rojas Hernández, Jasson Núñez Camacho
+Integrantes: 
+Giancarlo Alvarado Sánchez 		-- ID: 117230466 
+José Ricardo Herrera Solano 	-- ID: 402400213
+Josué Víquez Campos 			-- ID: 117250099
+Greivin Rojas Hernández 		-- ID: 402110725 
+Jasson Núñez Camacho 			-- ID: 117570784
 
 Pasos a seguir para probarlo:
 
