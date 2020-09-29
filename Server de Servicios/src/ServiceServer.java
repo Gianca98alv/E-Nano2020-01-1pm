@@ -4,10 +4,17 @@ import java.io.IOException;
 import java.util.*;
 import java.util.function.*;
 import java.util.stream.*;
+import java.io.BufferedReader;
 
 import java.lang.StringBuilder;
 import java.io.File;
+import java.io.FileReader;
 import java.util.Scanner;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.stream.Stream;
 
 import fi.iki.elonen.NanoHTTPD;
 import fi.iki.elonen.router.RouterNanoHTTPD;
@@ -27,15 +34,23 @@ public class ServiceServer extends RouterNanoHTTPD {
                return String.format("{\"autor\":\"%s\"}", nombre);
         }
     }
-	
-	
+
+ 
 	static public class AuthorsHandler extends DefaultHandler {
-        List<Autor> autor = Arrays.asList(new Autor("Giancarlo Alvarado S&aacutenchez"), new Autor("Jos&eacute Ricardo Herrera Solano"), 
-		new Autor("Josu&eacute V&iacutequez Campos"),new Autor("Greivin Rojas Hern&aacutendez"), new Autor("Jasson N&uacute&ntildeez Camacho"));
+        /*List<Autor> autor = Arrays.asList(new Autor("Giancarlo Alvarado S&aacutenchez"), new Autor("Jos&eacute Ricardo Herrera Solano"), 
+        new Autor("Josu&eacute V&iacutequez Campos"),new Autor("Greivin Rojas Hern&aacutendez"), new Autor("Jasson N&uacute&ntildeez Camacho"));*/
+        
         @Override
         public String getText() {
-            return autor.stream()
-                       .map(Autor::toString)
+            List<Autor> autor = new ArrayList<>();
+            Path path = Paths.get("src/autors.txt");
+            try (Stream<String> lines = Files.lines(path)) {
+               autor = lines.map(s -> new Autor(s)).collect(Collectors.toList());
+            } catch (IOException ex) {
+                System.out.format("*** error", ex);
+            } 
+
+            return autor.stream().map(Autor::toString)
                        .collect(Collectors.joining(",", "[", "]"));
             
         }
@@ -90,3 +105,4 @@ public class ServiceServer extends RouterNanoHTTPD {
         new ServiceServer(PORT);
     }
 }
+

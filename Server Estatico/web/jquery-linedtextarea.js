@@ -73,11 +73,23 @@
   };
 })(jQuery);
    
-   function getAutors(){
+   /*function getAutors(){
     fetch('http://localhost:9000/authors')
     .then( response => response.json())
     .then(json => printAutors(json))
       .catch(err => console.log(err));
+   }*/
+
+   async function getAutors()
+   {
+	try
+	{
+		let response = await fetch('http://localhost:9000/authors');
+		printAutors(await response.json());
+	}
+	catch(err)
+	{ console.log(err)
+	}
    }
 
    function printAutors(json){
