@@ -92,13 +92,19 @@
 	}
    }
 
-   function printAutors(json){
-    $("#panelAutors").empty();
-     json.forEach(element => printAutor(element));
+   function printAutors({project, course, instance, cycle, team:{members}}){
+	$("#panelAutors").empty();
+	$("#panelAutors").append("<div><strong>" + project + "</strong></div>");
+	$("#panelAutors").append("<div><strong>" + course + " Paradigmas de programacion</strong></div>");
+	$("#panelAutors").append("<div><strong>Grupo 01-1pm " + instance + " " + cycle + "</strong></div>");
+	$("#panelAutors").append("<div><strong>Integrantes:</strong></div>");
+
+     members.forEach(element => printAutor(element));
    }
 
-   function printAutor({autor}){
+   
+   function printAutor({firstName, surnames, id}){
     $("#panelAutors").append(
-      $("<div>" + autor + "</div>")
+      $("<div>" + firstName + " " +  surnames + " " + id + "</div>")
     );
    }

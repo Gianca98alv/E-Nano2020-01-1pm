@@ -42,18 +42,20 @@ public class ServiceServer extends RouterNanoHTTPD {
         
         @Override
         public String getText() {
-            List<Autor> autor = new ArrayList<>();
-            Path path = Paths.get("src/autors.txt");
+            List<String> autor = new ArrayList<>();
+           // Path path = Paths.get("src/autors.txt");
+            Path path = Paths.get("src/Autors.json");
             try (Stream<String> lines = Files.lines(path)) {
-               autor = lines.map(s -> new Autor(s)).collect(Collectors.toList());
+               autor = lines.map(s -> s.toString()).collect(Collectors.toList());
             } catch (IOException ex) {
                 System.out.format("*** error", ex);
             } 
 
-            return autor.stream().map(Autor::toString)
-                       .collect(Collectors.joining(",", "[", "]"));
+             //autor.stream().map(Autor::toString).collect(Collectors.joining(",", "[", "]"));
+             return autor.stream().reduce("", (acu, element) -> acu + element);
             
         }
+        
  
         @Override
         public String getMimeType() {
