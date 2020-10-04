@@ -105,6 +105,6 @@
    
    function printAutor({firstName, surnames, id}){
     $("#panelAutors").append(
-      $("<div>" + firstName + " " +  surnames + " " + id + "</div>")
+      $("<div class='row'><div class=' col-md-10 customTR punteado'>" + firstName + " " +  surnames + " " + id + "</div>")
     );
    }

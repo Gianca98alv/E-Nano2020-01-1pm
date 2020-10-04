@@ -54,6 +54,33 @@
 	
 }
 
+.punteado {
+	border-bottom:dotted 1px #28a745;
+	}
+
+	.customTR {
+		float: left;
+		width:75%;
+		padding-left:8%;
+		padding-right:1%;
+		padding-top: 6px;
+		height:100%;
+		text-align:left;
+	}
+
+	.inverseColor{
+		background-color: #343a40 !important;
+		color: azure;
+	}
+
+	.botonBorderInverse{
+		border-bottom : 1px solid black !important;
+	}
+
+	.topBorderInverse{
+		border-top : 1px solid black !important;
+	}
+
 
 
 
