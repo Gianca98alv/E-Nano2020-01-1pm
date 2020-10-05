@@ -1,5 +1,9 @@
 package com.enano.ServiceServer;
 
+import java.io.InputStream;
+import java.io.ByteArrayInputStream;
+import java.nio.charset.StandardCharsets;
+
 import java.io.IOException;
 import java.util.*;
 import java.util.function.*;
@@ -32,6 +36,26 @@ public class ServiceServer extends RouterNanoHTTPD {
     static record Autor(String nombre){
         public String toString(){
                return String.format("{\"autor\":\"%s\"}", nombre);
+        }
+    }
+	
+		static public class CompileHandler extends GeneralHandler {
+        @Override
+        public Response post(
+          UriResource uriResource, Map<String, String> urlParams, IHTTPSession session) {
+            try{
+            final HashMap<String, String> map = new HashMap<String, String>();
+            session.parseBody(map);
+            final String json = map.get("postData");
+            InputStream stream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
+			System.out.println(json);
+            Response x = newFixedLengthResponse(Response.Status.OK, NanoHTTPD.MIME_HTML, json);
+			x.addHeader("Access-Control-Allow-Method", "DELETE, POST, GET, PUT");
+			x.addHeader("Access-Control-Allow-Origin", "*");
+			x.addHeader("Access-Control-Allow-Headers", "Content-Type, X-Requested-With");
+			return x;
+            }catch(Exception ex){}
+            return newFixedLengthResponse(Response.Status.OK, NanoHTTPD.MIME_HTML, "Default Response");
         }
     }
 
@@ -79,6 +103,7 @@ public class ServiceServer extends RouterNanoHTTPD {
     @Override
     public void addMappings() {
 		addRoute("/authors", AuthorsHandler.class);
+		addRoute("/compile", CompileHandler.class);
     }
 
     private final List<String> ALLOWED_SITES = Arrays.asList("same-site", "same-origin");

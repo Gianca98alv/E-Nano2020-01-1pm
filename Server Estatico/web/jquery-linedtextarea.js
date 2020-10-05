@@ -108,3 +108,23 @@
       $("<div class='row'><div class=' col-md-10 customTR punteado'>" + firstName + " " +  surnames + " " + id + "</div>")
     );
    }
+   
+      async function sendCode(){
+	   $("#sendButton").prop('disabled',true);
+		let response = await fetch('http://localhost:9000/compile',
+		   {method:"POST",
+		   headers:{
+			   'Accept': '*/*',
+			   'Sec-Fetch-Site': 'same-site',
+			   'Access-Control-Request-Headers':'Content-Type'
+		   },
+		   body:$("#code").val()});
+		printOutput(await response.text());
+   }
+   
+   function printOutput(log){
+	   $("#console").val(log);
+	   $("#sendButton").prop('disabled',false);
+   }
+   
+   
