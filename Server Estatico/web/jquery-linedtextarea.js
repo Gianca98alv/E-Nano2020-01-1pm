@@ -87,8 +87,9 @@
 		let response = await fetch('http://localhost:9000/authors');
 		printAutors(await response.json());
 	}
-	catch(err)
-	{ console.log(err)
+	catch(err){ 
+		console.log(err);
+		alert("No se ha podido conectar con el servidor de servicios");
 	}
    }
 
@@ -100,6 +101,7 @@
 	$("#panelAutors").append("<div><strong>Integrantes:</strong></div>");
 
      members.forEach(element => printAutor(element));
+	 $('#about').modal('show');
    }
 
    
@@ -109,8 +111,9 @@
     );
    }
    
-      async function sendCode(){
+    async function sendCode(){
 	   $("#sendButton").prop('disabled',true);
+	   try{
 		let response = await fetch('http://localhost:9000/compile',
 		   {method:"POST",
 		   headers:{
@@ -120,11 +123,16 @@
 		   },
 		   body:$("#code").val()});
 		printOutput(await response.text());
+	   }catch(error){
+		   console.log(error);
+		   alert("No se ha podido conectar con el servidor de servicios");
+	   }
+	   	$("#sendButton").prop('disabled',false);
+
    }
    
    function printOutput(log){
 	   $("#console").val(log);
-	   $("#sendButton").prop('disabled',false);
    }
    
    
