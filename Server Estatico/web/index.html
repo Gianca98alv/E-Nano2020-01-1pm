@@ -42,18 +42,47 @@
 						</div>
 			</div>
 		</div>
+		
+	<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="clsClase">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content inverseColor">
+				<div class="modal-header">
+					<h4 class="modal-title" id="MensajeConf">Desea limpiar el area de clase?</h4>
+				</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close" onclick="cls('clase')">Si</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">No</button>
+					</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="clsConsola">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content inverseColor">
+				<div class="modal-header">
+					<h4 class="modal-title" id="MensajeConf">Desea limpiar el area de consola?</h4>
+				</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close" onclick="cls('consola')">Si</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">No</button>
+					</div>
+			</div>
+		</div>
+	</div>
+
 		<div class="row">
 			<div class="col-6">
 				<div class="jumbotron">
-				<textarea id="code" class="lined" rows="30" cols="70"></textarea>
-				<button type="button" class="btn btn-warning" style="margin-top: 10px;" onclick="clCode()">Clear</button>
+				<textarea id="clase" class="lined" rows="30" cols="70"></textarea>
+				<button type="button" class="btn btn-warning" style="margin-top: 10px;" onclick="confirmaCls('#clsClase','#clase')">Clear</button>
 				<button id='sendButton'  type="button" class="btn btn-success" style="margin-top: 10px;" onclick="sendCode()">Send</button>
 				</div>
 			</div>
 			<div class="col-6">
 				<div class="jumbotron">
-					<textarea id="console" class="console" rows="23" cols="95" disabled></textarea>
-					<button type="button" class="btn btn-warning" style="margin-top: 10px;" onclick="clConsole()">Clear</button>
+					<textarea id="consola" class="console" rows="23" cols="95" disabled></textarea>
+					<button type="button" class="btn btn-warning" style="margin-top: 10px;" onclick="confirmaCls('#clsConsola','#consola')">Clear</button>
 				</div>
 			</div>
 		</div>
@@ -62,12 +91,6 @@
 			$(function() {
 				$(".lined").linedtextarea();
 			});
-			function clCode(){
-				$("#code").val("");
-			}
-			function clConsole(){
-				$("#console").val("");
-			}
 		</script>
 	</body>
 </html>

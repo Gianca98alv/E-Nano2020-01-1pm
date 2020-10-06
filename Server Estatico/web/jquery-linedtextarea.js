@@ -113,26 +113,37 @@
    
     async function sendCode(){
 	   $("#sendButton").prop('disabled',true);
-	   try{
-		let response = await fetch('http://localhost:9000/compile',
-		   {method:"POST",
-		   headers:{
-			   'Accept': '*/*',
-			   'Sec-Fetch-Site': 'same-site',
-			   'Access-Control-Request-Headers':'Content-Type'
-		   },
-		   body:$("#code").val()});
-		printOutput(await response.text());
-	   }catch(error){
-		   console.log(error);
-		   alert("No se ha podido conectar con el servidor de servicios");
-	   }
+		if($("#clase").val()!=""){
+			try{
+				let response = await fetch('http://localhost:9000/compile',
+				{method:"POST",
+					headers:{
+					'Accept': '*/*',
+					'Sec-Fetch-Site': 'same-site',
+					'Access-Control-Request-Headers':'Content-Type'
+				},
+				body:$("#clase").val()});
+				printOutput(await response.text());
+			}catch(error){
+				console.log(error);
+				alert("No se ha podido conectar con el servidor de servicios");
+			}
+		}
 	   	$("#sendButton").prop('disabled',false);
 
    }
    
    function printOutput(log){
-	   $("#console").val(log);
+	   $("#consola").val(log);
+   }
+   
+   function cls(area){
+	   $("#"+area).val("");
+   }
+   
+   function confirmaCls(modal,area){
+	   if($(area).val()!="")
+		   $(modal).modal("show");
    }
    
    
