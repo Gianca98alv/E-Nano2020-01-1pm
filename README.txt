@@ -1,3 +1,11 @@
+# E-Nano2020-01-1pm
+Proyecto del grupo 01-1pm para el curso de Paradigmas de la Programación. NRC: 50059.  
+Integrantes: 
+Giancarlo Alvarado Sánchez	- 117230466
+Greivin Rojas Hernández		- 402110725
+Jasson Núñez Camacho		- 117570784
+Josué Víquez Campos		- 117250099
+
 Todos los comando se corren en cmd estando dentro del directorio del proyecto (enano)
 
 =========================================
