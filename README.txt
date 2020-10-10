@@ -1,18 +1,39 @@
-# E-Nano2020-01-1pm
-Proyecto del grupo 01-1pm para el curso de Paradigmas de la Programación. NRC: 50059.  
-Integrantes: Giancarlo Alvarado Sánchez, José Ricardo Herrera Solano, Josué Víquez Campos, Greivin Rojas Hernández, Jasson Núñez Camacho
+Todos los comando se corren en cmd estando dentro del directorio del proyecto (enano)
 
-Pasos a seguir para probarlo:
+=========================================
+Para compilar
+=========================================
 
-1. Levantar server de contenido estático (por defecto en puerto 9090).
-  1.1. En cmd, posicionarse dentro de la carpeta llamada "Server Estatico".
-  1.2. Ejecutar el siguiente comando para el build:   build.bat src\ServerRouter.java
-  1.3. Ejecutar el siguiente comando para el run:     run com.enano.StaticServer.ServerRouter
-  
-2. Levantar server de servicios (autores)(por defecto en puerto 9000).
-  1.1. En cmd, posicionarse dentro de la carpeta llamada "Server de Servicios".
-  1.2. Ejecutar el siguiente comando para el build:   build.bat src\ServiceServer.java
-  1.3. Ejecutar el siguiente comando para el run:     run com.enano.ServiceServer.ServiceServer
-  
-3. Visitar la siguiente dirección en el navegador:    http://localhost:9090/
-   Siendo 9090 el puerto del server de contenido estático
+mvn compile
+
+=========================================
+Para correr server de servicios
+=========================================
+
+mvn exec:java -Dexec.mainClass="com.paradigmas2020.ServiceServer"
+
+=========================================
+Para correr server de contenido estático
+=========================================
+
+mvn exec:java -Dexec.mainClass="com.paradigmas2020.ServerRouter"
+
+=========================================
+Si es necesario hacer clean
+=========================================
+
+mvn clean verify
+
+=========================================
+Otras consideraciones
+=========================================
+Para el compile
+Como en esta prueba aún se usa record, se añadió --enable-preview en los argumentos 
+de los plugin maven-compiler-plugin y maven-surefire-plugin 
+
+Para el run
+El comando mvn exec: java corre con un JDK dado dentro del contexto de maven el cual por defecto no 
+contiene --enable-preview
+Por lo que, se añadió en el directorio raíz del proyecto la carpeta .mvn la cual contiene un archivo 
+jvm.config que a su vez contiene en texto --enable-preview el cual se pasa como argumento en el run
+

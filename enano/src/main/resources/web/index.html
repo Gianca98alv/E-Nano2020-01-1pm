@@ -1,0 +1,103 @@
+<!
+Autores
+Giancarlo Alvarado Sánchez	- 117230466
+Greivin Rojas Hernández		- 402110725
+Jasson Núñez Camacho		- 117570784
+Josué Víquez Campos			- 117250099
+>
+
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" charset="utf8">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+		<script src="jquery-linedtextarea.js"></script>
+		<link href="styles.css" type="text/css" rel="stylesheet" />
+		<title>E-Nano</title>
+	</head>
+	<body>
+		<header>
+			<div class="navbar navbar-dark bg-dark box-shadow">
+				<div class="container d-flex justify-content-between">
+					<a href="#" class="navbar-brand d-flex align-items-center">
+						<strong>E-Nano</strong>
+					</a>
+					<button type="button" class="btn btn-secondary" onclick="getAutors()">
+						<span><i class="fas fa-info-circle"></i></span>
+					</button>
+				</div>
+			</div>
+		</header>
+		<div class="modal fade" id="about" tabindex="-1" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content inverseColor">
+					<div class="modal-header botonBorderInverse">
+						<h4 class="modal-title">About</h4>
+						<button type="button" class="close" data-dismiss="modal" style="color: #ffc107;">&times;</button>
+					</div>
+					<div class="modal-body">
+						
+							<div id="panelAutors">
+							</div>
+						</div>
+							<div class="modal-footer topBorderInverse">
+								<strong>Version: 0.1</strong>
+							</div>
+						</div>
+			</div>
+		</div>
+		
+	<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="clsClase">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content inverseColor">
+				<div class="modal-header">
+					<h4 class="modal-title" id="MensajeConf">Desea limpiar el area de clase?</h4>
+				</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close" onclick="cls('clase')">Si</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">No</button>
+					</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="clsConsola">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content inverseColor">
+				<div class="modal-header">
+					<h4 class="modal-title" id="MensajeConf">Desea limpiar el area de consola?</h4>
+				</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close" onclick="cls('consola')">Si</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">No</button>
+					</div>
+			</div>
+		</div>
+	</div>
+
+		<div class="row">
+			<div class="col-6">
+				<div class="jumbotron">
+				<textarea id="clase" class="lined" rows="30" cols="70"></textarea>
+				<button type="button" class="btn btn-warning" style="margin-top: 10px;" onclick="confirmaCls('#clsClase','#clase')">Clear</button>
+				<button id='sendButton'  type="button" class="btn btn-success" style="margin-top: 10px;" onclick="sendCode()">Send</button>
+				</div>
+			</div>
+			<div class="col-6">
+				<div class="jumbotron">
+					<textarea id="consola" class="console" rows="23" cols="95" disabled></textarea>
+					<button type="button" class="btn btn-warning" style="margin-top: 10px;" onclick="confirmaCls('#clsConsola','#consola')">Clear</button>
+				</div>
+			</div>
+		</div>
+	
+		<script>
+			$(function() {
+				$(".lined").linedtextarea();
+			});
+		</script>
+	</body>
+</html>
