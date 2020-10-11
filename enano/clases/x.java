@@ -1,7 +1,5 @@
-class x{
-int x=12;
-String foo(){
+public class x{
 
-return 32;
-}
+
+int x="21";
 }
