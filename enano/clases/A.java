@@ -1,2 +1,3 @@
-public class A{
-int x=21;}
+class a {
+ int x =12;
+}

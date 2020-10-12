@@ -4,9 +4,9 @@ import java.io.InputStream;
 import java.io.FileInputStream;
 import java.io.ByteArrayInputStream;
 import java.nio.charset.StandardCharsets;
-import java.io.File;  // Import the File class
+import java.io.File;
 import java.io.FileWriter;   
-import java.util.Scanner; // Import the Scanner class to read text files
+import java.util.Scanner;
 import java.util.Locale;
 import java.nio.charset.Charset;
 import javax.tools.*;
@@ -94,13 +94,20 @@ public class ServiceServer extends RouterNanoHTTPD {
 			String result="";
 			if (diagsCollector.getDiagnostics().size() == 0){
 				result= "La compilacion fue exitosa";
+			}else{
+			var dianostics = diagsCollector.getDiagnostics();
+			result = dianostics.stream()
+			.map(element -> linesFormat(element.getLineNumber(), element.getMessage( locale ), element.getSource().getName()))
+			.reduce("", (acu, element) -> acu + element);
 			}
-			for( var d: diagsCollector.getDiagnostics() ) {
-				long pos = d.getLineNumber();
-				String location = pos >= 0 ? String.format("Line: %d", pos) : "Unavailable:";
-				result+=String.format("%s %s in source '%s' \n", location,d.getMessage( locale ), d.getSource().getName());
-			}
-			return result;
+
+		return result;
+		}
+
+		public String linesFormat(long pos , String message, String sourceName){
+
+			String location = pos >= 0 ? String.format("Line: %d", pos) : "Unavailable:";
+				return String.format("%s %s in source '%s' \n", location, message, sourceName);
 		}
 		
 		

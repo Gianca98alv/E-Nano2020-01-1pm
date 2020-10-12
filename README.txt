@@ -6,6 +6,8 @@ Greivin Rojas Hernández		- 402110725
 Jasson Núñez Camacho		- 117570784
 Josué Víquez Campos		- 117250099
 
+Link de github: https://github.com/Gianca98alv/E-Nano2020-01-1pm.git (Repositorio privado)
+
 Todos los comando se corren en cmd estando dentro del directorio del proyecto (enano)
 
 =========================================
@@ -19,29 +21,30 @@ Para correr server de servicios
 =========================================
 
 mvn exec:java -Dexec.mainClass="com.paradigmas2020.ServiceServer"
+Por default corre en el puerto 9000
 
 =========================================
 Para correr server de contenido estático
 =========================================
 
 mvn exec:java -Dexec.mainClass="com.paradigmas2020.ServerRouter"
+Por default corre en el puerto 9090
 
 =========================================
-Si es necesario hacer clean
+Ruta del .properties con los números de puerto
 =========================================
 
-mvn clean verify
+E-Nano2020-01-1pm\enano\src\main\resources\ports.properties
 
 =========================================
-Otras consideraciones
+URIs de acceso
 =========================================
-Para el compile
-Como en esta prueba aún se usa record, se añadió --enable-preview en los argumentos 
-de los plugin maven-compiler-plugin y maven-surefire-plugin 
 
-Para el run
-El comando mvn exec: java corre con un JDK dado dentro del contexto de maven el cual por defecto no 
-contiene --enable-preview
-Por lo que, se añadió en el directorio raíz del proyecto la carpeta .mvn la cual contiene un archivo 
-jvm.config que a su vez contiene en texto --enable-preview el cual se pasa como argumento en el run
+Página principal
+http://localhost:9090/
+http://localhost:9090/index
+
+
+
+
 

@@ -15,6 +15,10 @@ import fi.iki.elonen.NanoHTTPD;
 import fi.iki.elonen.router.RouterNanoHTTPD;
 import static fi.iki.elonen.NanoHTTPD.Response;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import static fi.iki.elonen.NanoHTTPD.MIME_PLAINTEXT;
 import static fi.iki.elonen.NanoHTTPD.SOCKET_READ_TIMEOUT;
 
@@ -61,17 +65,14 @@ public class ServerRouter extends RouterNanoHTTPD {
         @Override
         public String getText() {
 			StringBuilder data=new StringBuilder();
-               try {
-				File myObj = new File("src/main/resources/web/index.html");
-				Scanner myReader = new Scanner(myObj);
-				while (myReader.hasNextLine()) {
-					data.append(myReader.nextLine());
-				}
-				myReader.close();
-				return data.toString();
-			} catch (Exception e) {
+            Path path = Paths.get("src/main/resources/web/index.html");
+            try (Stream<String> lines = Files.lines(path)) {
+                lines.map(s -> s.toString()).forEach(l -> data.append(l));
+
+                return data.toString();
+            } catch (Exception e) {
 				return "Error";
-			}
+            }
         }
         @Override
         public String getMimeType() {
@@ -87,17 +88,15 @@ public class ServerRouter extends RouterNanoHTTPD {
 		@Override
         public String getText() {
 			StringBuilder data=new StringBuilder();
-               try {
-				File myObj = new File("src/main/resources/web/styles.css");
-				Scanner myReader = new Scanner(myObj);
-				while (myReader.hasNextLine()) {
-					data.append(myReader.nextLine());
-				}
-				myReader.close();
-				return data.toString();
-			} catch (Exception e) {
+               
+            Path path = Paths.get("src/main/resources/web/styles.css");
+            try (Stream<String> lines = Files.lines(path)) {
+                lines.map(s -> s.toString()).forEach(l -> data.append(l));
+
+                return data.toString();
+            } catch (Exception e) {
 				return "Error";
-			}
+            }
         }
         @Override
         public String getMimeType() {
@@ -114,17 +113,15 @@ public class ServerRouter extends RouterNanoHTTPD {
 		@Override
         public String getText() {
 			StringBuilder data=new StringBuilder();
-               try {
-				File myObj = new File("src/main/resources/web/jquery-linedtextarea.js");
-				Scanner myReader = new Scanner(myObj);
-				while (myReader.hasNextLine()) {
-					data.append(myReader.nextLine());
-				}
-				myReader.close();
-				return data.toString();
-			} catch (Exception e) {
+                          
+            Path path = Paths.get("src/main/resources/web/script.js");
+            try (Stream<String> lines = Files.lines(path)) {
+                lines.map(s -> s.toString()).forEach(l -> data.append(l));
+
+                return data.toString();
+            } catch (Exception e) {
 				return "Error";
-			}
+            }
         }
         @Override
         public String getMimeType() {
@@ -151,7 +148,7 @@ public class ServerRouter extends RouterNanoHTTPD {
         addRoute("/", HomeHandler.class);
 		addRoute("/index", HomeHandler.class);
 		addRoute("/styles.css", StylesHandler.class);
-		addRoute("/jquery-linedtextarea.js", LindedTextHandler.class);
+		addRoute("/script.js", LindedTextHandler.class);
 		addRoute("/authors", AuthorsHandler.class);
     }
 
