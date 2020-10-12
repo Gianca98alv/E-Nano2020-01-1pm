@@ -1,3 +1,10 @@
+/*Autores
+Giancarlo Alvarado Sánchez	- 117230466
+Greivin Rojas Hernández		- 402110725
+Jasson Núñez Camacho		- 117570784
+Josué Víquez Campos			- 117250099
+*/
+
 (function($) {
 	$.fn.linedtextarea = function(options) {
 		var opts = $.extend({}, $.fn.linedtextarea.defaults, options);
@@ -128,6 +135,8 @@
 				console.log(error);
 				alert("No se ha podido conectar con el servidor de servicios");
 			}
+		}else{
+			$("#empty").modal("show");
 		}
 	   	$("#sendButton").prop('disabled',false);
 
@@ -142,8 +151,10 @@
    }
    
    function confirmaCls(modal,area){
-	   if($(area).val()!="")
+	   if($(area).val()!=""){
 		   $(modal).modal("show");
+	   }else
+		   $("#empty").modal("show");
    }
    
    

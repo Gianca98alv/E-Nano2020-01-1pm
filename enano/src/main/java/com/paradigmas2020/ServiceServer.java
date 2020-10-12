@@ -40,8 +40,12 @@ import static fi.iki.elonen.NanoHTTPD.SOCKET_READ_TIMEOUT;
 
 import fi.iki.elonen.router.RouterNanoHTTPD.DefaultHandler;
 
-
-
+/*Autores
+Giancarlo Alvarado Sánchez	- 117230466
+Greivin Rojas Hernández		- 402110725
+Jasson Núñez Camacho		- 117570784
+Josué Víquez Campos			- 117250099
+*/
 public class ServiceServer extends RouterNanoHTTPD {
 		
     static public class CompileHandler extends GeneralHandler {
@@ -53,23 +57,20 @@ public class ServiceServer extends RouterNanoHTTPD {
 				session.parseBody(map);
 				final String json = map.get("postData");
 				InputStream stream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
-				Response x = newFixedLengthResponse(Response.Status.OK, NanoHTTPD.MIME_HTML, compile(writeCode(json)));
-				x.addHeader("Access-Control-Allow-Method", "DELETE, POST, GET, PUT");
-				x.addHeader("Access-Control-Allow-Origin", "*");
-				x.addHeader("Access-Control-Allow-Headers", "Content-Type, X-Requested-With");
-				return x;
-            }catch(Exception ex){}
+				Response response = newFixedLengthResponse(Response.Status.OK, NanoHTTPD.MIME_HTML, compile(writeCode(json)));
+				return response;
+            }catch(Exception ex){
             return newFixedLengthResponse(Response.Status.OK, NanoHTTPD.MIME_HTML, "El codigo ingresado no corresponde a una clase java");
+			}
         }
 		
 		public String compile(String name){
 			File clase = new File(name);
-			// Get compiler and configure compilation task
 			JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
 			DiagnosticCollector< JavaFileObject > diagsCollector = new DiagnosticCollector<>();
 			Locale locale = null;
 			Charset charset = null;
-			String outdir = "classes";
+			String outdir = "clases";
 			String optionsString = String.format("-d %s", outdir);
 			
 			try {
@@ -77,7 +78,6 @@ public class ServiceServer extends RouterNanoHTTPD {
 				var sources = fileManager.getJavaFileObjectsFromFiles(Arrays.asList( clase ) );
          
 				Writer writer = new PrintWriter(System.err);
-				// Also check out compiler.isSupportedOption() if needed
 			
 				Iterable<String> options = Arrays.asList(optionsString.split(" "));
 				Iterable<String> annotations = null;
@@ -89,14 +89,10 @@ public class ServiceServer extends RouterNanoHTTPD {
 													sources );
 				compileTask.call();
 			} catch(Exception e){
-				//System.err.format("%s%n", e);
-				//System.exit(-1);
+				return "Se ha producido un error al intentar compilar";
 			}
 			String result="";
-			// Report diagnostics
 			if (diagsCollector.getDiagnostics().size() == 0){
-				//System.out.format( "*** No errors found in %s ***%n",  clase );
-				//System.out.format( "*** Output is in directory %s ***%n", outdir );
 				result= "La compilacion fue exitosa";
 			}
 			for( var d: diagsCollector.getDiagnostics() ) {
@@ -139,8 +135,6 @@ public class ServiceServer extends RouterNanoHTTPD {
 
  
 	static public class AuthorsHandler extends DefaultHandler {
-        /*List<Autor> autor = Arrays.asList(new Autor("Giancarlo Alvarado S&aacutenchez"), new Autor("Jos&eacute Ricardo Herrera Solano"), 
-        new Autor("Josu&eacute V&iacutequez Campos"),new Autor("Greivin Rojas Hern&aacutendez"), new Autor("Jasson N&uacute&ntildeez Camacho"));*/
         
         @Override
         public String getText() {

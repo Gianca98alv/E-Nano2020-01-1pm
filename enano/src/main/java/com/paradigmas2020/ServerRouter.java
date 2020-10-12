@@ -20,7 +20,12 @@ import static fi.iki.elonen.NanoHTTPD.SOCKET_READ_TIMEOUT;
 
 import fi.iki.elonen.router.RouterNanoHTTPD.DefaultHandler;
 
-
+/*Autores
+Giancarlo Alvarado Sánchez	- 117230466
+Greivin Rojas Hernández		- 402110725
+Jasson Núñez Camacho		- 117570784
+Josué Víquez Campos			- 117250099
+*/
 
 public class ServerRouter extends RouterNanoHTTPD {
     static record Autor(String nombre){
