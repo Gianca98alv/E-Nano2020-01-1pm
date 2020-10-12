@@ -25,7 +25,7 @@ let editor;
 	}
    }
 
-   function printAutors({project, course, instance, cycle, team:{members}}){
+   function printAutors({project, course, instance, cycle, members}){
 	$("#panelAutors").empty();
 	$("#panelAutors").append("<div><strong>" + project + "</strong></div>");
 	$("#panelAutors").append("<div><strong>" + course + " Paradigmas de programacion</strong></div>");

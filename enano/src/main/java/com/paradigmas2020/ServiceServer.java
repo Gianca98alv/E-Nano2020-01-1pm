@@ -40,6 +40,13 @@ import static fi.iki.elonen.NanoHTTPD.SOCKET_READ_TIMEOUT;
 
 import fi.iki.elonen.router.RouterNanoHTTPD.DefaultHandler;
 
+import com.mongodb.MongoClient;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
+
+
 /*Autores
 Giancarlo Alvarado Sánchez	- 117230466
 Greivin Rojas Hernández		- 402110725
@@ -145,6 +152,17 @@ public class ServiceServer extends RouterNanoHTTPD {
         
         @Override
         public String getText() {
+			MongoClient mongoClient = new MongoClient();
+			MongoDatabase database = mongoClient.getDatabase("E-nano");
+			MongoCollection<Document> collection = database.getCollection("Autores");
+			MongoCursor<Document> cursor = collection.find().iterator();		
+			String s="";
+			try {
+				s=cursor.next().toJson();
+			}catch(Exception ex){}
+			cursor.close();
+			return s;
+			/*
 			ClassLoader classloader = Thread.currentThread().getContextClassLoader();
             List<String> autor = new ArrayList<>();
            // Path path = Paths.get("src/autors.txt");
@@ -156,8 +174,8 @@ public class ServiceServer extends RouterNanoHTTPD {
             } 
 
              //autor.stream().map(Autor::toString).collect(Collectors.joining(",", "[", "]"));
-             return autor.stream().reduce("", (acu, element) -> acu + element);
-            
+             return autor.stream().reduce("", (acu, element) -> acu + element
+			 */
         }
         
  
