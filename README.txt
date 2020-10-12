@@ -44,7 +44,11 @@ Página principal
 http://localhost:9090/
 http://localhost:9090/index
 
+Servicio de about
+http://localhost:9000/authors
 
+Servicio de compile
+http://localhost:9000/compile
 
 
 
