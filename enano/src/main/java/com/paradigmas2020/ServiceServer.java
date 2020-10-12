@@ -44,6 +44,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.MongoClientURI;
 import org.bson.Document;
 
 
@@ -152,7 +153,7 @@ public class ServiceServer extends RouterNanoHTTPD {
         
         @Override
         public String getText() {
-			MongoClient mongoClient = new MongoClient();
+			MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb+srv://nanouser:nanouser@cluster0.hiuli.azure.mongodb.net/<dbname>?retryWrites=true&w=majority"));
 			MongoDatabase database = mongoClient.getDatabase("E-nano");
 			MongoCollection<Document> collection = database.getCollection("Autores");
 			MongoCursor<Document> cursor = collection.find().iterator();		

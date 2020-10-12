@@ -44,11 +44,9 @@ Página principal
 http://localhost:9090/
 http://localhost:9090/index
 
-Servicio de about
-http://localhost:9000/authors
+Cluster de MongoDB, nombre de la base de datos: E-nano, Coleccion: Autores
+mongodb+srv://nanouser:nanouser@cluster0.hiuli.azure.mongodb.net/test
 
-Servicio de compile
-http://localhost:9000/compile
 
 
 
