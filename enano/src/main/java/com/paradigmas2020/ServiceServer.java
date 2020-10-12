@@ -9,6 +9,8 @@ import java.io.FileWriter;
 import java.util.Scanner; // Import the Scanner class to read text files
 import java.util.Locale;
 import java.nio.charset.Charset;
+
+import javax.lang.model.element.Element;
 import javax.tools.*;
 import java.io.PrintStream;
 import java.io.Writer;
@@ -99,14 +101,33 @@ public class ServiceServer extends RouterNanoHTTPD {
 				//System.out.format( "*** Output is in directory %s ***%n", outdir );
 				result= "La compilacion fue exitosa";
 			}
-			for( var d: diagsCollector.getDiagnostics() ) {
+			else{
+			/*for( var d: diagsCollector.getDiagnostics() ) {
 				long pos = d.getLineNumber();
 				String location = pos >= 0 ? String.format("Line: %d", pos) : "Unavailable:";
 				result+=String.format("%s %s in source '%s' \n", location,d.getMessage( locale ), d.getSource().getName());
 			}
+			return result;*/
+
+			var diagnostics = diagsCollector.getDiagnostics();
+
+			result = diagnostics.stream()
+			.map(element -> linesFormat(element.getLineNumber(), element.getMessage( locale ), element.getSource().getName()))
+			.reduce("", (acu, element) -> acu + element);
+
 			return result;
 		}
-		
+
+		return result;
+			
+		}
+
+		public String linesFormat(long pos, String  message, String sourceName){
+
+			String location = pos >= 0 ? String.format("Line: %d", pos) : "Unavailable:";
+			return String.format("%s %s in source '%s' \n", location,message, sourceName);
+		}
+			
 		
 		public String writeCode(String code) throws Exception{
 			File clase = new File("clases/newFile.java");

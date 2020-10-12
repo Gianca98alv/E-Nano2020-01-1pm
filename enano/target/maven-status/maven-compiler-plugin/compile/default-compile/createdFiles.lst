@@ -1,9 +1,9 @@
 com\paradigmas2020\ServiceServer$CompileHandler.class
 com\paradigmas2020\ServerRouter.class
 com\paradigmas2020\ServerRouter$LindedTextHandler.class
+com\paradigmas2020\ServiceServer.class
 com\paradigmas2020\ServerRouter$AuthorsHandler.class
 com\paradigmas2020\ServerRouter$HomeHandler.class
+com\paradigmas2020\ServerRouter$StylesHandler.class
 com\paradigmas2020\ServerRouter$Autor.class
 com\paradigmas2020\ServiceServer$AuthorsHandler.class
-com\paradigmas2020\ServiceServer.class
-com\paradigmas2020\ServerRouter$StylesHandler.class
