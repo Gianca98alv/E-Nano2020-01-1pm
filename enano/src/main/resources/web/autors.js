@@ -1,3 +1,10 @@
+/*Autores
+Giancarlo Alvarado Sánchez	- 117230466
+Greivin Rojas Hernández		- 402110725
+Jasson Núñez Camacho		- 117570784
+Josué Víquez Campos			- 117250099
+*/
+
 async function getAutors(){
     try
     {

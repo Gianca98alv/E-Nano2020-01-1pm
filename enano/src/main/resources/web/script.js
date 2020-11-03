@@ -4,6 +4,7 @@ Greivin Rojas Hernández		- 402110725
 Jasson Núñez Camacho		- 117570784
 Josué Víquez Campos			- 117250099
 */
+
 import {getAutors} from "./autors.js"; 
 import {sendCode, clsConsola, confirmaClsClase, confirmaClsConsola, clsClase} from "./sendCode.js"; 
 
