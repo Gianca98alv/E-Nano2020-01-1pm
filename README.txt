@@ -19,15 +19,22 @@ mvn compile
 =========================================
 Para correr server de servicios
 =========================================
-
+maven
 mvn exec:java -Dexec.mainClass="com.paradigmas2020.ServiceServer"
+
+gradle
+gradle runrunServicesServer
+
 Por default corre en el puerto 9000
 
 =========================================
 Para correr server de contenido estático
 =========================================
-
+maven
 mvn exec:java -Dexec.mainClass="com.paradigmas2020.ServerRouter"
+
+gradle
+gradle runrunServicesServer
 Por default corre en el puerto 9090
 
 =========================================
