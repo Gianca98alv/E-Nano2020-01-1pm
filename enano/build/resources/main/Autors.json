@@ -1,0 +1,35 @@
+{
+    "project": "Enano",
+    "course": "EIF400",
+    "instance": "NRC50059",
+    "cycle": "II-2020",
+    "organization": "UNA",
+    "projectSite": "https://some.site.com/enano",
+    "team": {
+      "code": "GG-HH",
+      "members": [
+        {
+          "firstName": "Giancarlo",
+          "surnames": "Alvarado S&aacutenchez",
+          "id": "117230466"
+        },
+        {
+          "firstName": "Josu&eacute",
+          "surnames": "V&iacutequez Campos",
+          "id": "117250099"
+        },
+        {
+          "firstName": "Greivin",
+          "surnames": "Rojas Hern&aacutendez",
+          "id": "402110725"
+        },
+        {
+          "firstName": "Jasson",
+          "surnames": "N&uacute&ntildeez Camacho",
+          "id": "117570784"
+        }
+      ]
+    }
+  }
+
+  

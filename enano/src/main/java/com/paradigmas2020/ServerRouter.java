@@ -32,34 +32,6 @@ Josué Víquez Campos			- 117250099
 */
 
 public class ServerRouter extends RouterNanoHTTPD {
-    static record Autor(String nombre){
-        public String toString(){
-               return String.format("{\"autor\":\"%s\"}", nombre);
-        }
-    }
-	
-	
-	static public class AuthorsHandler extends DefaultHandler {
-        List<Autor> autor = Arrays.asList(new Autor("Giancarlo Alvarado S&aacutenchez"), new Autor("Jos&eacute Ricardo Herrera Solano"), 
-		new Autor("Josu&eacute V&iacutequez Campos"),new Autor("Greivin Rojas Hernandez"), new Autor("Jasson N&uacute&ntildeez Camacho"));
-        @Override
-        public String getText() {
-            return autor.stream()
-                       .map(Autor::toString)
-                       .collect(Collectors.joining(",", "[", "]"));
-            
-        }
- 
-        @Override
-        public String getMimeType() {
-            return "application/json";
-        }
-     
-        @Override
-        public Response.IStatus getStatus() {
-            return Response.Status.OK;
-        }
-    }
   
     static public class HomeHandler extends DefaultHandler {
         @Override
@@ -132,10 +104,56 @@ public class ServerRouter extends RouterNanoHTTPD {
             return Response.Status.OK;
         }
     }
+
+    static public class AutorsModuleHandler extends DefaultHandler {
+		@Override
+        public String getText() {
+			StringBuilder data=new StringBuilder();
+                          
+            Path path = Paths.get("src/main/resources/web/autors.js");
+            try (Stream<String> lines = Files.lines(path)) {
+                lines.map(s -> s.toString()).forEach(l -> data.append(l));
+
+                return data.toString();
+            } catch (Exception e) {
+				return "Error";
+            }
+        }
+        @Override
+        public String getMimeType() {
+            return "text/javascript";
+        }
+        @Override
+        public Response.IStatus getStatus() {
+            return Response.Status.OK;
+        }
+    }
+
+    static public class SendCodeModuleHandler extends DefaultHandler {
+		@Override
+        public String getText() {
+			StringBuilder data=new StringBuilder();
+                          
+            Path path = Paths.get("src/main/resources/web/sendCode.js");
+            try (Stream<String> lines = Files.lines(path)) {
+                lines.map(s -> s.toString()).forEach(l -> data.append(l));
+
+                return data.toString();
+            } catch (Exception e) {
+				return "Error";
+            }
+        }
+        @Override
+        public String getMimeType() {
+            return "text/javascript";
+        }
+        @Override
+        public Response.IStatus getStatus() {
+            return Response.Status.OK;
+        }
+    }
 	
 	
-	
-    
     public ServerRouter(int port) throws IOException {
         super(port);
         addMappings();
@@ -148,8 +166,10 @@ public class ServerRouter extends RouterNanoHTTPD {
         addRoute("/", HomeHandler.class);
 		addRoute("/index", HomeHandler.class);
 		addRoute("/styles.css", StylesHandler.class);
-		addRoute("/script.js", LindedTextHandler.class);
-		addRoute("/authors", AuthorsHandler.class);
+        addRoute("/script.js", LindedTextHandler.class);
+        addRoute("/autors.js", AutorsModuleHandler.class);
+        addRoute("/sendCode.js", SendCodeModuleHandler.class);
+        
     }
 
     private final List<String> ALLOWED_SITES = Arrays.asList("same-site", "same-origin");

@@ -8,44 +8,78 @@ Josué Víquez Campos		- 117250099
 
 Link de github: https://github.com/Gianca98alv/E-Nano2020-01-1pm.git (Repositorio privado)
 
-Todos los comando se corren en cmd estando dentro del directorio del proyecto (enano)
+**********************************************************
+			Servidores
+**********************************************************
+---Servicios		(puerto 9000)
+---Estatico		(puerto 9090)
+---Transpiler		(puerto 8080)
 
-=========================================
-Para compilar
-=========================================
+*********************************************************
+			Ejecución
+*********************************************************
 
-mvn compile
+A) --Se pueden levantar los tres de manera automática ejecutando
+     el archivo .bat correspondiente a la herramienta de build deseada 
+     "start(Gradle).bat" o "start(Maven).bat"
 
-=========================================
-Para correr server de servicios
-=========================================
+B) --Se puede levantar cada uno por aparte con a los siguientes comandos:
+     (*Se debe posicionar en la carpeta "enano")
+	=====================================================
+				Maven
+	=====================================================
+	---Build
+	mvn compile
 
-mvn exec:java -Dexec.mainClass="com.paradigmas2020.ServiceServer"
-Por default corre en el puerto 9000
-
-=========================================
-Para correr server de contenido estático
-=========================================
-
-mvn exec:java -Dexec.mainClass="com.paradigmas2020.ServerRouter"
-Por default corre en el puerto 9090
-
-=========================================
-Ruta del .properties con los números de puerto
-=========================================
+	---Estático
+	mvn exec:java -Dexec.mainClass="com.paradigmas2020.ServerRouter"
+	
+	---Servicios
+	mvn exec:java -Dexec.mainClass="com.paradigmas2020.ServiceServer"
+		
+	======================================================
+				Gradle
+	======================================================
+	---Build
+	gradle
+	
+	---Estático
+	gradle runStaticServer
+	
+	---Servicios
+	gradle runServicesServer
+	
+	==================================================================
+				Servidor de Prolog
+	==================================================================
+	---Posicionado en la carpeta llamada "prolog"
+	swipl transpileServer.pl
+	
+	---Posicionado en la carpeta "enano"
+	swipl prolog\transpileServer.pl
+	
+	
+**************************************************************
+	Ruta del .properties con los números de puerto
+**************************************************************
 
 E-Nano2020-01-1pm\enano\src\main\resources\ports.properties
 
-=========================================
-URIs de acceso
-=========================================
+**************************************************************
+			URIs de acceso
+**************************************************************
 
 Página principal
 http://localhost:9090/
 http://localhost:9090/index
 
-Cluster de MongoDB, nombre de la base de datos: E-nano, Coleccion: Autores
-mongodb+srv://nanouser:nanouser@cluster0.hiuli.azure.mongodb.net/test
+*************************************************************
+			Base de datos
+*************************************************************
+--Cluster de MongoDB
+--nombre de la base de datos: E-nano
+--Coleccion: Autores
+--link: mongodb+srv://nanouser:nanouser@cluster0.hiuli.azure.mongodb.net/test
 
 
 
