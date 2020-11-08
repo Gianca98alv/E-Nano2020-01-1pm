@@ -8,7 +8,6 @@ Josué Víquez Campos		- 117250099
 
 Link de github: https://github.com/Gianca98alv/E-Nano2020-01-1pm.git (Repositorio privado)
 
-<<<<<<< HEAD
 **********************************************************
 			Servidores
 **********************************************************
@@ -63,40 +62,6 @@ B) --Se puede levantar cada uno por aparte con a los siguientes comandos:
 **************************************************************
 	Ruta del .properties con los números de puerto
 **************************************************************
-=======
-Todos los comando se corren en cmd estando dentro del directorio del proyecto (enano)
-
-=========================================
-Para compilar
-=========================================
-
-mvn compile
-
-=========================================
-Para correr server de servicios
-=========================================
-maven
-mvn exec:java -Dexec.mainClass="com.paradigmas2020.ServiceServer"
-
-gradle
-gradle runrunServicesServer
-
-Por default corre en el puerto 9000
-
-=========================================
-Para correr server de contenido estático
-=========================================
-maven
-mvn exec:java -Dexec.mainClass="com.paradigmas2020.ServerRouter"
-
-gradle
-gradle runrunServicesServer
-Por default corre en el puerto 9090
-
-=========================================
-Ruta del .properties con los números de puerto
-=========================================
->>>>>>> 5896ec411d691dfdb02ede2d423345072d165ff0
 
 E-Nano2020-01-1pm\enano\src\main\resources\ports.properties
 
