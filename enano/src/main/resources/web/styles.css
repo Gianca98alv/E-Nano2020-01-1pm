@@ -6,6 +6,16 @@ Jasson Núñez Camacho		- 117570784
 Josué Víquez Campos			- 117250099
 */
 
+.jumbotron {
+	padding-bottom: 30px;
+	padding-top: 15px;
+}
+
+#fileName{
+	margin-bottom: 10px;
+	width: 97%;
+}
+
 .linedwrap {
 	border: 3px solid black;
 	border-radius: 6px;

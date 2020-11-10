@@ -3,15 +3,24 @@
 :- use_module(library(http/http_json)).
 :- use_module(library(http/http_log)).
 :- use_module(library(http/http_client)).
-
+:- use_module(library(http/http_cors)).
+:- set_setting(http:cors, [*]).
 % URL handlers.
-:- http_handler('/', handle_request, [method(post)]).
+:- http_handler('/newFile', writeFileHandler, [method(post)]).
+:- http_handler('/renameFile', renameFileHandler, [method(post)]).
+:- http_handler('/checkForFile', checkFileHandler, [method(post)]).
 
-% Calculates a + b.
+%main response
+writeFileHandler(Request) :- http_read_data(Request, Data,[]), writeBody(Data),cors_enable,reply_json_dict([]).
+renameFileHandler(Request) :- http_read_data(Request, Data,[]), renameFile(Data),cors_enable,reply_json_dict([]).
+checkFileHandler(Request) :- http_read_data(Request, Data,[]), checkForFile(Data,R),cors_enable,reply_json_dict(R).
 
-writeBody(B):- open('NewFile.no',write,Out),write(Out,B),close(Out).
+%Utils
+writeBody(B):- open('nanoFiles\\new-File.no',write,Out),write(Out,B),close(Out).
+renameFile(N):-atom_concat('nanoFiles\\',N,NN), rename_file('nanoFiles\\new-File.no',NN).
+checkForFile(F,R):-atom_concat('nanoFiles\\',F,FF),exists_file(FF)->R = 'existe';R = 'no existe'.
 
-handle_request(Request) :- http_read_data(Request, Data,[]), writeBody(Data),reply_json_dict([]).
+
 
 server(Port) :- http_server(http_dispatch, [port(Port)]).
 
