@@ -6,7 +6,7 @@ Josué Víquez Campos			- 117250099
 */
 
 import {getAutors} from "./autors.js"; 
-import {doSendCode, sendCode, clsConsola, confirmaClsClase, confirmaClsConsola, clsClase,clsEvaluacion,enableSend} from "./sendCode.js"; 
+import {doSendCode, sendCode, clsConsola, confirmaClsClase, confirmaClsConsola, clsClase,clsEvaluacion,enableSend, run} from "./sendCode.js"; 
 
 let editor;
 let send;
@@ -25,6 +25,8 @@ let send;
 		document.getElementById("confirmaClsClaseBoton").addEventListener("click", ConfirmaClsClase);
 		document.getElementById("confirmaClsConsolaBoton").addEventListener("click", confirmaClsConsola);
 		document.getElementById("clsClaseBoton").addEventListener("click", ClsClase);
+
+		run();
 	};
 	
 	function EnableSend(){
@@ -52,7 +54,7 @@ let send;
 	}
 
     
-  
+	
    
 
    

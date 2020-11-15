@@ -147,4 +147,23 @@ function confirmarRemplazo(){
 	$("#remplazarArchivo").modal("show");
 }
 
-export {doSendCode,sendCode, clsConsola, confirmaClsClase, confirmaClsConsola, clsClase,clsEvaluacion, enableSend}
+async function run(){
+     
+    try{
+        let response = await fetch('http://localhost:8000/run',
+        {method:"POST",
+            headers:{
+            'Accept': '*/*',
+            'Sec-Fetch-Site': 'same-site',
+            'Access-Control-Request-Headers':'Content-Type'
+        },
+        body:"Main"});
+			$("#evaluacion").val(await response.text());
+		}catch(error){
+			console.log(error);
+			alert("No se ha podido conectar con el servidor de servicios");
+		}
+
+}
+
+export {doSendCode,sendCode, clsConsola, confirmaClsClase, confirmaClsConsola, clsClase,clsEvaluacion, enableSend, run}

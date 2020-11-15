@@ -6,7 +6,7 @@ Josué Víquez Campos			- 117250099
 */
 
 import {getAutors} from "./autors.js"; 
-import {doSendCode, sendCode, clsConsola, confirmaClsClase, confirmaClsConsola, clsClase,clsEvaluacion} from "./sendCode.js"; 
+import {doSendCode, sendCode, clsConsola, confirmaClsClase, confirmaClsConsola, clsClase,clsEvaluacion,enableSend, run} from "./sendCode.js"; 
 
 let editor;
 let send;
@@ -17,6 +17,7 @@ let send;
 		});
 		editor.setSize(660,475);
 		
+		document.getElementById("noRemplazarBtn").addEventListener("click", EnableSend);
 		document.getElementById("remplazarArchivoBtn").addEventListener("click", DoSendCode);
 		document.getElementById("clickme").addEventListener("click", getAutors);
 		document.getElementById("sendButton").addEventListener("click", SendCode);
@@ -24,8 +25,13 @@ let send;
 		document.getElementById("confirmaClsClaseBoton").addEventListener("click", ConfirmaClsClase);
 		document.getElementById("confirmaClsConsolaBoton").addEventListener("click", confirmaClsConsola);
 		document.getElementById("clsClaseBoton").addEventListener("click", ClsClase);
-		document.getElementById("clsClaseBoton").addEventListener("keyup", fileNameTermination);
+
+		run();
 	};
+	
+	function EnableSend(){
+		enableSend();
+	}
 	
 	function DoSendCode(){
 		doSendCode(editor);
@@ -46,13 +52,9 @@ let send;
 	function ClsEvaluacion(){
 		clsEvaluacion();
 	}
-	
-	function fileNameTermination(){
-		console.log("sdasdasdsadsad");
-		console.log("#evaluacion").value();
-	}
+
     
-  
+	
    
 
    

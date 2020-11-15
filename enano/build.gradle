@@ -19,6 +19,7 @@ task(runServicesServer, dependsOn: 'classes', type: JavaExec) {
    classpath = sourceSets.main.runtimeClasspath
 }
 
+
 repositories {
     mavenCentral()
 }

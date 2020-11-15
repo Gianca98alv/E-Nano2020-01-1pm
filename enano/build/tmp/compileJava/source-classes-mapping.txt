@@ -1,7 +1,3 @@
-com/paradigmas2020/ServiceServer.java
- com.paradigmas2020.ServiceServer
- com.paradigmas2020.ServiceServer$AuthorsHandler
- com.paradigmas2020.ServiceServer$CompileHandler
 com/paradigmas2020/ServerRouter.java
  com.paradigmas2020.ServerRouter
  com.paradigmas2020.ServerRouter$AutorsModuleHandler
@@ -9,3 +5,9 @@ com/paradigmas2020/ServerRouter.java
  com.paradigmas2020.ServerRouter$LindedTextHandler
  com.paradigmas2020.ServerRouter$SendCodeModuleHandler
  com.paradigmas2020.ServerRouter$StylesHandler
+com/paradigmas2020/ServiceServer.java
+ com.paradigmas2020.ServiceServer
+ com.paradigmas2020.ServiceServer$AuthorsHandler
+ com.paradigmas2020.ServiceServer$CompileHandler
+com/paradigmas2020/Compiler.java
+ com.paradigmas2020.Compiler
