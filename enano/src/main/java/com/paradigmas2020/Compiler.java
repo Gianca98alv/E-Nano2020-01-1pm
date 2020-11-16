@@ -145,4 +145,19 @@ class Compiler {
             return text;
         }
             
-    }
+	
+	
+	public String readTranspileFile (String name){
+
+		String result = "";
+
+            Path path = Paths.get("clases/" + name + ".java" );
+            try (Stream<String> lines = Files.lines(path)) {
+               result = lines.map(s -> s.toString()).reduce("", (acu, element) -> acu + element +"$$");
+            } catch (IOException ex) {
+                System.out.format("*** error", ex);
+            } 
+
+             return result;
+	}
+}

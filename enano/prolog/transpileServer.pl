@@ -4,7 +4,7 @@
 :- use_module(library(http/http_log)).
 :- use_module(library(http/http_client)).
 :- use_module(library(http/http_cors)).
-:- use_module(client, [runClass/2,compileFile/2]).
+:- use_module(client, [runClass/2,compileFile/2, readTranspileFile/2]).
 :-use_module(parser,[transpile/2]).
 
 :- set_setting(http:cors, [*]).
@@ -14,6 +14,7 @@
 :- http_handler('/checkForFile', checkFileHandler, [method(post)]).
 :- http_handler('/compile', compilerCall, [method(post)]).
 :- http_handler('/run', evalHandler, [method(post)]).
+:- http_handler('/getTranspileCode', getTranspileCode, [method(post)]).
 
 %main response
 writeFileHandler(Request) :- http_read_data(Request, Data,[]), writeBody(Data),cors_enable,reply_json_dict('DSDS').
@@ -21,6 +22,7 @@ renameFileHandler(Request) :- http_read_data(Request, Data,[]), renameFile(Data,
 checkFileHandler(Request) :- http_read_data(Request, Data,[]), checkForFile(Data,R),cors_enable,reply_json_dict(R).
 evalHandler(Request) :- http_read_data(Request, Data,[]), sendToRun(Data,R),cors_enable,reply_json_dict(R).
 compilerCall(Request):-http_read_data(Request, Data,[]), compileFile(Data,R),cors_enable,reply_json_dict(R).
+getTranspileCode(Request) :- http_read_data(Request, Data,[]), readTranspileFile(Data,R),cors_enable,reply_json_dict(R).
 
 
 %Utils

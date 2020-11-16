@@ -80,7 +80,7 @@ public class ServiceServer extends RouterNanoHTTPD {
 	}
 	
 	static public class ExecuterHandler extends GeneralHandler{
-		        @Override
+		@Override
         public Response post(
           UriResource uriResource, Map<String, String> urlParams, IHTTPSession session) {
             try{
@@ -96,7 +96,26 @@ public class ServiceServer extends RouterNanoHTTPD {
             return newFixedLengthResponse(Response.Status.OK, NanoHTTPD.MIME_HTML, "Se ha producido un error en el servidor");
 			}
         }
-	}
+    }
+    
+    static public class TranspileCodeHandler extends GeneralHandler{
+    @Override
+    public Response post(
+    UriResource uriResource, Map<String, String> urlParams, IHTTPSession session) {
+        try{
+            final HashMap<String, String> map = new HashMap<String, String>();
+            session.parseBody(map);
+            final String json = map.get("postData");
+            InputStream stream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
+            Compiler compiler = new Compiler();
+            Response response;
+            response = newFixedLengthResponse(Response.Status.OK, NanoHTTPD.MIME_HTML, compiler.readTranspileFile(json));
+            return response;
+        }catch(Exception ex){
+        return newFixedLengthResponse(Response.Status.OK, NanoHTTPD.MIME_HTML, "Se ha producido un error en el servidor");
+        }
+    }
+}
 
 	
  
@@ -156,7 +175,8 @@ public class ServiceServer extends RouterNanoHTTPD {
     public void addMappings() {
 		addRoute("/authors", AuthorsHandler.class);
 		addRoute("/compile", CompileHandler.class);
-		addRoute("/run",ExecuterHandler.class);
+        addRoute("/run",ExecuterHandler.class);
+        addRoute("/transpileCode",TranspileCodeHandler.class);
     }
 
     private final List<String> ALLOWED_SITES = Arrays.asList("same-site", "same-origin");

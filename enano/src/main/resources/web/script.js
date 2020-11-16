@@ -6,7 +6,7 @@ Josué Víquez Campos			- 117250099
 */
 
 import {getAutors} from "./autors.js"; 
-import {doSendCode, sendCode, clsConsola, confirmaClsClase, confirmaClsConsola, clsClase, clsEvaluacion,enableSend,evalEvent, run} from "./sendCode.js"; 
+import {doSendCode, sendCode, clsConsola, confirmaClsClase, confirmaClsConsola, clsClase, clsEvaluacion,enableSend,evalEvent} from "./sendCode.js"; 
 
 let editor;
 let send;

@@ -70,7 +70,7 @@ async function doSendCode(editor){
 
 }
 
-async function renameFile(r){
+async function renameFile(){
 	try{
         let response = await fetch('http://localhost:8000/renameFile',
         {method:"POST",
@@ -80,7 +80,9 @@ async function renameFile(r){
         'Access-Control-Request-Headers':'Content-Type'
         },
         body:getName()});
-		printOutput(await response.text());
+        let res = await response.text();
+        printOutput(res);
+        getTranspileCode(getName());
     }catch(error){
         console.log(error);
         alert("No se ha podido conectar con el servidor de servicios");
@@ -102,7 +104,7 @@ function disableSend(){
 function printOutput(log){
 	let vec=log.split(',');
 	console.log(log);
-    $("#consola").val(log);
+    $("#consola").val(vec[0].replaceAll("[","") + "\n");
 }
 
 
@@ -155,6 +157,26 @@ async function run(name){
 
 }
 
+
+async function getTranspileCode(name){
+     
+    try{
+        let response = await fetch('http://localhost:8000/getTranspileCode',
+        {method:"POST",
+            headers:{
+            'Accept': '*/*',
+            'Sec-Fetch-Site': 'same-site',
+            'Access-Control-Request-Headers':'Content-Type'
+        },
+        body:name});
+		writeOutputConsole( await response.text());
+		}catch(error){
+			console.log(error);
+			alert("No se ha podido conectar con el servidor de servicios");
+		}
+
+}
+
 function writeOutput(text){
 	text = text.substr(1,text.length-2);
 	let results = text.split("$$");
@@ -165,6 +187,19 @@ function addResult(e){
 	if(e!=""){
 		let val = $("#evaluacion").val();
 		$("#evaluacion").val(val+e+'\n');
+	}
+}
+
+function writeOutputConsole(text){
+	text = text.substr(1,text.length-2);
+	let results = text.split("$$");
+	results.forEach(e=>addResultConsole(e));
+}
+
+function addResultConsole(e){
+	if(e!=""){
+		let val = $("#consola").val();
+		$("#consola").val(val+e+'\n');
 	}
 }
 
@@ -191,4 +226,4 @@ function evalEvent(e){
 
 
 
-export {doSendCode,sendCode, clsConsola, confirmaClsClase, confirmaClsConsola, clsClase,clsEvaluacion, enableSend,evalEvent,run}
+export {doSendCode,sendCode, clsConsola, confirmaClsClase, confirmaClsConsola, clsClase,clsEvaluacion, enableSend,evalEvent}
