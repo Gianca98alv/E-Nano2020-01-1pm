@@ -4,33 +4,20 @@ Greivin Rojas Hernández		- 402110725
 Jasson Núñez Camacho		- 117570784
 Josué Víquez Campos			- 117250099
 */
-function checkTerm(){
-	let a = $("#fileName").val();
-	if(a.slice(-1)=='.'){
-		$("#fileName").val(a+"no");
-	}else if(a.slice(-2)=='.n'){
-		$("#fileName").val(a+"o");
-	}else if(a.slice(-3)!='.no'){
-		$("#fileName").val(a+".no");
-	}
-}
 
 function getName(){
-	checkTerm();
 	let input;
 	if($("#fileName").val()==""){
-		input = "File.no";
+		input = "File";
 	}else{
 		input = $("#fileName").val();
 	}
-	let nameRegex = /[a-zA-Z]+.no/g;
-	let nombre = input.match(nameRegex);
+	let nombre = input.match("[A-za-z1-9]+");
 	return nombre[0];
 }
 
 
 function sendCode(editor){
-	/*TODO verificar que termine en .no*/
 	if(editor.getValue()!=""){
 		disableSend();
 		checkName(getName(),editor);
@@ -75,7 +62,7 @@ async function doSendCode(editor){
                  'Access-Control-Request-Headers':'Content-Type'
              },
              body:editor.getValue()});
-             printOutput(await response.text());
+			 renameFile(await response);
          }catch(error){
              console.log(error);
              alert("No se ha podido conectar con el servidor de servicios");
@@ -83,7 +70,7 @@ async function doSendCode(editor){
 
 }
 
-async function renameFile(){
+async function renameFile(r){
 	try{
         let response = await fetch('http://localhost:8000/renameFile',
         {method:"POST",
@@ -93,6 +80,7 @@ async function renameFile(){
         'Access-Control-Request-Headers':'Content-Type'
         },
         body:getName()});
+		printOutput(await response.text());
     }catch(error){
         console.log(error);
         alert("No se ha podido conectar con el servidor de servicios");
@@ -112,8 +100,9 @@ function disableSend(){
 
 
 function printOutput(log){
+	let vec=log.split(',');
+	console.log(log);
     $("#consola").val(log);
-	renameFile();
 }
 
 
@@ -147,7 +136,7 @@ function confirmarRemplazo(){
 	$("#remplazarArchivo").modal("show");
 }
 
-async function run(){
+async function run(name){
      
     try{
         let response = await fetch('http://localhost:8000/run',
@@ -157,8 +146,8 @@ async function run(){
             'Sec-Fetch-Site': 'same-site',
             'Access-Control-Request-Headers':'Content-Type'
         },
-        body:"Main"});
-			$("#evaluacion").val(await response.text());
+        body:name});
+		writeOutput(await response.text());
 		}catch(error){
 			console.log(error);
 			alert("No se ha podido conectar con el servidor de servicios");
@@ -166,4 +155,40 @@ async function run(){
 
 }
 
-export {doSendCode,sendCode, clsConsola, confirmaClsClase, confirmaClsConsola, clsClase,clsEvaluacion, enableSend, run}
+function writeOutput(text){
+	text = text.substr(1,text.length-2);
+	let results = text.split("$$");
+	results.forEach(e=>addResult(e));
+}
+
+function addResult(e){
+	if(e!=""){
+		let val = $("#evaluacion").val();
+		$("#evaluacion").val(val+e+'\n');
+	}
+}
+
+function evalEvent(e){
+	let content = $("#evaluacion").val();
+	let key = e.charCode || e.keyCode || 0;
+	if(key === 13 ){
+		let lastLine = content.substr(content.lastIndexOf("\n")+1);
+		if(lastLine=="cls"){
+			clsEvaluacion();
+		}else if (lastLine.match("[A-za-z1-9]+(.main[(][)]){1}")){
+			run(lastLine.substr(0,lastLine.length-7));
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+export {doSendCode,sendCode, clsConsola, confirmaClsClase, confirmaClsConsola, clsClase,clsEvaluacion, enableSend,evalEvent,run}

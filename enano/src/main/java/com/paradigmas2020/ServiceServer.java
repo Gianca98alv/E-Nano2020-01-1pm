@@ -1,5 +1,12 @@
 package com.paradigmas2020;
 
+/*Autores
+Giancarlo Alvarado Sánchez	- 117230466
+Greivin Rojas Hernández		- 402110725
+Jasson Núñez Camacho		- 117570784
+Josué Víquez Campos			- 117250099
+*/
+
 import java.io.InputStream;
 import java.io.FileInputStream;
 import java.io.ByteArrayInputStream;
@@ -48,12 +55,7 @@ import com.mongodb.MongoClientURI;
 import org.bson.Document;
 
 
-/*Autores
-Giancarlo Alvarado Sánchez	- 117230466
-Greivin Rojas Hernández		- 402110725
-Jasson Núñez Camacho		- 117570784
-Josué Víquez Campos			- 117250099
-*/
+
 public class ServiceServer extends RouterNanoHTTPD {
 		
     static public class CompileHandler extends GeneralHandler {
@@ -67,19 +69,33 @@ public class ServiceServer extends RouterNanoHTTPD {
 				InputStream stream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
 				Compiler compiler = new Compiler();
 				Response response;
-				if(json == "Main"){
-				 response = newFixedLengthResponse(Response.Status.OK, NanoHTTPD.MIME_HTML, compiler.compile(compiler.writeCode(json)));
-				}
-				else{
-					 response = newFixedLengthResponse(Response.Status.OK, NanoHTTPD.MIME_HTML, compiler.run(json));
-				}
+				response = newFixedLengthResponse(Response.Status.OK, NanoHTTPD.MIME_HTML, compiler.compile(json));
 				return response;
             }catch(Exception ex){
-            return newFixedLengthResponse(Response.Status.OK, NanoHTTPD.MIME_HTML, "El codigo ingresado no corresponde a una clase java");
+				return newFixedLengthResponse(Response.Status.OK, NanoHTTPD.MIME_HTML, "El codigo ingresado no corresponde a 	una clase java");
 			}
         }
 		
 		
+	}
+	
+	static public class ExecuterHandler extends GeneralHandler{
+		        @Override
+        public Response post(
+          UriResource uriResource, Map<String, String> urlParams, IHTTPSession session) {
+            try{
+				final HashMap<String, String> map = new HashMap<String, String>();
+				session.parseBody(map);
+				final String json = map.get("postData");
+				InputStream stream = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
+				Compiler compiler = new Compiler();
+				Response response;
+				response = newFixedLengthResponse(Response.Status.OK, NanoHTTPD.MIME_HTML, compiler.run(json));
+				return response;
+            }catch(Exception ex){
+            return newFixedLengthResponse(Response.Status.OK, NanoHTTPD.MIME_HTML, "Se ha producido un error en el servidor");
+			}
+        }
 	}
 
 	
@@ -140,6 +156,7 @@ public class ServiceServer extends RouterNanoHTTPD {
     public void addMappings() {
 		addRoute("/authors", AuthorsHandler.class);
 		addRoute("/compile", CompileHandler.class);
+		addRoute("/run",ExecuterHandler.class);
     }
 
     private final List<String> ALLOWED_SITES = Arrays.asList("same-site", "same-origin");

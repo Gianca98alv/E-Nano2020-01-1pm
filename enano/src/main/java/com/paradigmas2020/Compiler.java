@@ -41,14 +41,13 @@ import java.util.stream.Stream;
 class Compiler {
 
 	public String compile(String name){
-		File clase = new File(name);
+		File clase = new File("clases\\"+name+".java");
 		JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
 		DiagnosticCollector< JavaFileObject > diagsCollector = new DiagnosticCollector<>();
 		Locale locale = null;
 		Charset charset = null;
 		String outdir = "clases";
 		String optionsString = String.format("-d %s", outdir);
-		
 		try {
 			var fileManager = compiler.getStandardFileManager( diagsCollector, locale, charset );
 			var sources = fileManager.getJavaFileObjectsFromFiles(Arrays.asList( clase ) );
@@ -65,7 +64,7 @@ class Compiler {
 												sources );
 			compileTask.call();
 		} catch(Exception e){
-			return "Se ha producido un error al intentar compilar";
+			return "Se ha producido un error al intentar compilar: "+e;
 		}
 		String result="";
 		if (diagsCollector.getDiagnostics().size() == 0){
@@ -134,7 +133,7 @@ class Compiler {
 					}*///end while
 
 					text += errorOutput.lines().reduce("", (acu, element) -> acu + element);
-					text += output.lines().reduce("", (acu, element) -> acu + element);
+					text += output.lines().reduce("", (acu, element) -> acu + element+"$$");
 					errorOutput.close();
 					output.close();
 				} catch(Exception ex){}//end catc

@@ -55,7 +55,7 @@ B) --Se puede levantar cada uno por aparte con a los siguientes comandos:
 	---Posicionado en la carpeta llamada "prolog"
 	swipl transpileServer.pl
 	
-	---Posicionado en la carpeta "enano"
+	---Posicionado en la carpeta "enano" *debe ser llamado desde esta carpeta para que la tome como root, sino no va a encontrar los archivos*
 	swipl prolog\transpileServer.pl
 	
 	
